@@ -1,30 +1,35 @@
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* next;
+
+    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val, Node* _left, Node* _right, Node* _next)
+        : val(_val), left(_left), right(_right), next(_next) {}
+};
+*/
+
 class Solution {
 public:
-    typedef pair<Node*,int> pii;
     Node* connect(Node* root) {
-        if(!root){
-            return NULL;
-        }
-        Node *rt = nullptr;
-        queue<pii> Q;
-        Q.push({root,0});
-        int lvl = 0;
-        while(!Q.empty()){
-            pii temp = Q.front();
-            Q.pop();
-            Node *t2 = temp.first;
-            int level = temp.second;
-            if(level > lvl){
-                rt = nullptr;
-                lvl = level;
-            }
-            t2->next = rt;
-            rt = t2;
-            if(t2->right){
-                Q.push({t2->right,temp.second+1});
-            }
-            if(t2->left){
-                Q.push({t2->left,temp.second+1});
+        Node *levelFirst = root;
+        for(;levelFirst != nullptr;levelFirst = levelFirst->left){
+            for(Node* curr = levelFirst;curr != nullptr;curr = curr->next){
+                if(curr->left){
+                    curr->left->next = curr->right;
+                    if(curr->next){
+                        curr->right->next = curr->next->left;
+                    }
+                }else{
+                    break;
+                }
             }
         }
         return root;
