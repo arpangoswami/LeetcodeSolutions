@@ -12,8 +12,7 @@ public:
         }
         if(dp[i][j][k] != -1 || dp[i][k][j] != -1)
             return dp[i][j][k];
-        // return dp[i][j][k] = dp[i][k][j] = grid[i][j] + (j == k ? 0 : grid[i][k]) + max({solve(grid,i+1,j-1,k-1),solve(grid,i+1,j-1,k),solve(grid,i+1,j-1,k+1),solve(grid,i+1,j,k-1),solve(grid,i+1,j,k),solve(grid,i+1,j,k+1),solve(grid,i+1,j+1,k-1),solve(grid,i+1,j+1,k),solve(grid,i+1,j+1,k+1)});
-        int &ans = dp[i][j][k];
+        int &ans = dp[i][j][k] = dp[i][k][j];
         ans = grid[i][j];
         if(j != k){
             ans += grid[i][k];
@@ -25,8 +24,8 @@ public:
             }
         }
         ans += add;
-        dp[i][k][j] = ans;
-        dp[i][j][k] = ans;
+        //dp[i][k][j] = ans;
+        //dp[i][j][k] = ans;
         return ans;
     }
     int cherryPickup(vector<vector<int>>& grid) {
