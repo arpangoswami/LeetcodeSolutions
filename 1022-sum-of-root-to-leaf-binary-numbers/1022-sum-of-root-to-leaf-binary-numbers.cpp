@@ -15,8 +15,7 @@ class Solution {
             return;
         }
         if(!(root->left) && !(root->right)){
-            int tillNow = sum*2 + root->val;
-            totalSum += tillNow;
+            totalSum += sum*2 + root->val;
         }else{
             allPathsToLeaf(root->left,2*sum+root->val,totalSum);
             allPathsToLeaf(root->right,2*sum+root->val,totalSum);
