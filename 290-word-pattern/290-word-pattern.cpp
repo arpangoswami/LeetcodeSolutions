@@ -1,8 +1,8 @@
 class Solution {
 public:
     bool wordPattern(string pattern, string s) {
-        map<char,string> mapping;
-        map<string,char> reverseMapping;
+        unordered_map<char,string> mapping;
+        unordered_map<string,char> reverseMapping;
         istringstream iss(s);
         string word;
         int n = pattern.size(),i = 0;
