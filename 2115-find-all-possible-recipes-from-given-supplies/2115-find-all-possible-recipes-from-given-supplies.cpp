@@ -1,10 +1,10 @@
 class Solution {
 public:
     vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
-        map<string,vector<string>> adjList;
-        map<string,int> indegree;
+        unordered_map<string,vector<string>> adjList;
+        unordered_map<string,int> indegree;
         vector<string> sol;
-        set<string> recipeSet;
+        unordered_set<string> recipeSet;
         int n = recipes.size();
         for(int i=0;i<n;i++){
             for(string x:ingredients[i]){
