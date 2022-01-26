@@ -4,22 +4,31 @@ public:
         if(s.size() & 1){
             return false;
         }
-        int left = 0,right = 0,n = s.size();
+        int remaining = 0,n = s.size();
         for(int i=0;i<n;i++){
             if(s[i] == '(' || locked[i] == '0'){
-                left++;
+                remaining++;
             }else{
-                left--;
+                remaining--;
             }
-            if(s[n-i-1] == ')' || locked[n-i-1] == '0'){
-                right++;
-            }else{
-                right--;
-            }
-            if(left < 0 || right < 0){
+            if(remaining < 0){
                 return false;
             }
         }
-        return true;
+        if(remaining < 0){
+            return false;
+        }
+        remaining = 0;
+        for(int i=n-1;i>=0;i--){
+            if(s[i] == ')' || locked[i] == '0'){
+                remaining++;
+            }else{
+                remaining--;
+            }
+            if(remaining < 0){
+                return false;
+            }
+        }
+        return remaining >= 0;
     }
 };
