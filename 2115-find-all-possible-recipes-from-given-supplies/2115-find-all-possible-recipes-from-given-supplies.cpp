@@ -24,12 +24,10 @@ public:
                 sol.push_back(foodItem);
             }
             for(string x:adjList[foodItem]){
-                if(indegree.count(x) && indegree[x] == 1){
+                if(indegree[x] == 1){
                     q.push(x);
-                    indegree.erase(x);
-                }else{
-                    indegree[x]--;
                 }
+                indegree[x]--;
             }
         }
         return sol;
