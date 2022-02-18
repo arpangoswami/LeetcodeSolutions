@@ -1,4 +1,11 @@
 class Solution {
+    void removeLeadingZeros(string &ans){
+        reverse(ans.begin(),ans.end());
+        while(ans.back() == '0'){
+            ans.pop_back();
+        }
+        reverse(ans.begin(),ans.end());
+    }
 public:
     string removeKdigits(string s, int k) {
         if(s.size() == k || s == "0"){
@@ -24,11 +31,8 @@ public:
         while(ans.size() > (N-k)){
             ans.pop_back();
         }
-        reverse(ans.begin(),ans.end());
-        while(ans.back() == '0'){
-            ans.pop_back();
-        }
-        reverse(ans.begin(),ans.end());
+        removeLeadingZeros(ans);
+        
         if(ans == ""){
             return "0";
         }
