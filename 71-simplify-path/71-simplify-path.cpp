@@ -16,19 +16,14 @@ public:
         string ans = "/";
         int N = paths.size();
         for(int i=0;i<N;i++){
-            if(paths[i].size() > 0){
-                ans += paths[i];
-                if(i < (N-1)){
-                    ans.push_back('/');
-                }
+            ans += paths[i];
+            if(i < (N-1)){
+                ans.push_back('/');
             }
         }
-        while(ans.back() == '/'){
-            ans.pop_back();
-        }
-        if(ans.size() == 0){
-            return "/";
-        }
+        // if(ans.size() == 0){
+        //     return "/";
+        // }
         return ans;
     }
 };
