@@ -4,6 +4,9 @@ public:
         int n = tops.size();
         int ans = n+1;
         for(int i=1;i<=6;i++){
+            if(i != tops[0] && i != bottoms[0]){
+                continue;
+            }
             int countA = 0,countB = 0;
             bool flag = true;
             for(int j=0;j<n;j++){
