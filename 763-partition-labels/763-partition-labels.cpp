@@ -20,17 +20,16 @@ class Solution {
 public:
     vector<int> partitionLabels(string s) {
         vector<int> ans;
-        vector<pair<int,int>> firstLast(26);
+        vector<int> last(26);
         for(char c='a';c<='z';c++){
-            firstLast[c-'a'].first = getFirstCharacter(s,c);
-            firstLast[c-'a'].second = getLastCharacter(s,c);
+            last[c-'a'] = getLastCharacter(s,c);
         }
         int n = s.size();
         for(int i=0;i<n;){
-            int end = firstLast[s[i]-'a'].second;
+            int end = last[s[i]-'a'];
             int start = i;
             for(int j=start;j<=end;j++){
-                end = max(end,firstLast[s[j]-'a'].second);
+                end = max(end,last[s[j]-'a']);
             }
             ans.push_back(end-start+1);
             i = end+1;
