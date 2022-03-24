@@ -1,45 +1,28 @@
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        unordered_map<char, vector<int> > umap;
-        vector<bool> valid(26, false);
-        string res = "";
-
-        for(int i=0; i<s.length(); i++){
-            umap[s[i]].push_back(i);
-            valid[s[i]-'a'] = true;
+        int n = s.size();
+        if(n == 0){
+            return "";
         }
-
-        int distinctCount = umap.size();
-        int curIndex = 0;
-
-        while(distinctCount--){
-            for(char ch='a'; ch<='z'; ch++) {
-			    // check character validity smaller -> bigger
-                if(valid[ch-'a']) {
-                    bool flag = true;
-                    int index = lower_bound(umap[ch].begin(), umap[ch].end(), \
-                                            curIndex) - umap[ch].begin();
-					// check if all remaining characters appear atleast once if current character is choosen
-                    for(char ch2='a'; ch2<='z'; ch2++) { 
-                        if(not valid[ch2-'a'] or ch == ch2)   continue;
-                        if(upper_bound(umap[ch2].begin(), umap[ch2].end(), \
-                                       umap[ch][index]) - umap[ch2].begin() == umap[ch2].size()) {
-                            flag = false;
-                            break;
-                        }
-                    }
-
-                    if(flag) {
-                        valid[ch-'a'] = false;
-                        res += ch;
-                        curIndex = umap[ch][index];
-                        umap.erase(ch);
-                        break;
-                    }
-                }
+        vector<int> lastPosition(26);
+        for(int i=0;i<n;i++){
+            lastPosition[s[i]-'a'] = i;
+        }
+        vector<bool> seen(26);
+        string ans;
+        ans.push_back(s[0]);
+        seen[ans[0] - 'a'] = true;
+        for(int i=1;i<n;i++){
+            while(ans.size() > 0 && s[i] < ans.back() && lastPosition[ans.back() - 'a'] > i && seen[s[i] - 'a'] == false){
+                seen[ans.back() - 'a'] = false;
+                ans.pop_back();
+            }
+            if(!seen[s[i] - 'a']){
+                ans.push_back(s[i]);
+                seen[s[i] - 'a'] = true;
             }
         }
-        return res;
+        return ans;
     }
 };
