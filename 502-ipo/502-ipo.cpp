@@ -8,7 +8,6 @@ public:
            project[i] = {capital[i],profits[i]}; 
         }
         sort(project.begin(),project.end());
-        int j = 0,totalProfit = 0;
         for(int i=0;i<n;i++){
             while(!pq.empty() && project[i].first > w && k > 0){
                 w += pq.top();
