@@ -3,10 +3,9 @@ public:
     int largestRectangleArea(vector<int>& arr) {
         int n = arr.size();
         stack<int> hist;
-        hist.push(0);
         int maxArea = 0;
-        for(int i=1;i<n;i++){
-            while(!hist.empty() && arr[i] < arr[hist.top()]){
+        for(int i=0;i<n;i++){
+            while(!hist.empty() && arr[i] <= arr[hist.top()]){
                 int tpIdx = hist.top();
                 hist.pop();
                 if(hist.empty()){
