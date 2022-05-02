@@ -5,7 +5,7 @@ public:
             while(j > i && nums[j] & 1){
                 j--;
             }
-            if(nums[i] & 1){
+            if(i < j && nums[i] & 1){
                 swap(nums[i],nums[j]);
                 j--;
             }
