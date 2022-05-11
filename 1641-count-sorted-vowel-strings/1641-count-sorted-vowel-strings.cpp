@@ -5,8 +5,10 @@ public:
         dp[0][0] = dp[0][1] = dp[0][2] = dp[0][3] = dp[0][4] = 1;
         for(int i=1;i<n;i++){
             for(int j=0;j<=4;j++){
-                for(int k=0;k<=j;k++){
-                    dp[i][j] += dp[i-1][k];
+                if(j == 0){
+                    dp[i][j] = dp[i-1][j];
+                }else{
+                    dp[i][j] = dp[i][j-1]+dp[i-1][j];
                 }
             }
         }
