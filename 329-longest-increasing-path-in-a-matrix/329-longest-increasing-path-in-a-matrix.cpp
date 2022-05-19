@@ -35,9 +35,7 @@ public:
                 if(dp[i][j] == -1){
                     ans = max(ans,recDp(i,j,matrix));
                 }
-                //cout<<dp[i][j]<<" ";
             }
-            //cout<<"\n";
         }
         return ans;
     }
