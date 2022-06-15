@@ -23,9 +23,9 @@ class Solution {
 public:
     int longestStrChain(vector<string>& words) {
         sort(words.begin(),words.end(),[](string &s1,string &s2){
-            if(s1.size() == s2.size()){
-                return s1 < s2;
-            }
+            // if(s1.size() == s2.size()){
+            //     return s1 < s2;
+            // }
             return s1.size() < s2.size();
         });
         int n = words.size();
