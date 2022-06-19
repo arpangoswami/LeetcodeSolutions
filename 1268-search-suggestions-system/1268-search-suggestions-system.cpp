@@ -1,50 +1,52 @@
 struct TrieNode{
-    set<string> wordsWithCommonPrefix;
+    set<string> wordsInserted;
     vector<TrieNode*> children;
+    char ch;
     bool isTerminal;
-    TrieNode(){
+    TrieNode(char _ch){
+        ch = _ch;
         children.resize(26,nullptr);
+        isTerminal = false;
     }
 };
 class Solution {
-    void insert(TrieNode* root,string &x){
+    void addWord(string &x,TrieNode *root){
         TrieNode *curr = root;
         for(char c:x){
-            if(!curr->children[c-'a']){
-                curr->children[c-'a'] = new TrieNode();
+            if(curr->children[c-'a'] == nullptr){
+                curr->children[c-'a'] = new TrieNode(c);
             }
-            (curr->wordsWithCommonPrefix).insert(x);
             curr = curr->children[c-'a'];
+            curr->wordsInserted.insert(x);
         }
-        curr->isTerminal = true;
-        (curr->wordsWithCommonPrefix).insert(x);
     }
 public:
     vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
-        TrieNode* root = new TrieNode();
+        TrieNode *root = new TrieNode('\0');
         for(string x:products){
-            insert(root,x);
+            addWord(x,root);
         }
-        vector<vector<string>> ans;
         TrieNode *curr = root;
-        for(char c:searchWord){
-            if(!curr){
-                ans.push_back({});
-                continue;
+        vector<vector<string>> ans;
+        int N = searchWord.size();
+        for(int i=0;i<N;i++){
+            if(!curr->children[searchWord[i]-'a']){
+                for(int j=i;j<N;j++){
+                    ans.push_back({});
+                }
+                return ans;
+            }else{
+                curr = curr->children[searchWord[i] - 'a'];
+                vector<string> toPush;
+                for(string x:curr->wordsInserted){
+                    toPush.push_back(x);
+                    if(toPush.size() == 3){
+                        break;
+                    }
+                }
+                ans.push_back(toPush);
             }
-            curr = curr->children[c-'a'];
-            if(!curr){
-                ans.push_back({});
-                continue;
-            }
-            const set<string> &vals = (curr->wordsWithCommonPrefix);
-            vector<string> toPush;
-            auto it = vals.begin();
-            while(it != vals.end() && toPush.size() < 3){
-                toPush.push_back(*it);
-                it++;
-            }
-            ans.push_back(toPush);
+            
         }
         return ans;
     }
