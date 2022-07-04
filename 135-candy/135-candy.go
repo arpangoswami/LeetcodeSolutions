@@ -9,6 +9,7 @@ func candy(ratings []int) int {
             ans[i] = 1
         }
     }
+    sum := ans[n-1]
     for i:=n-2;i>=0;i-- {
         if ratings[i] > ratings[i+1] {
             val := 1+ans[i+1]
@@ -16,11 +17,7 @@ func candy(ratings []int) int {
                 ans[i] = val
             }
         }
-    }
-    sum := 0
-    for _,val := range ans {
-        //fmt.Printf("%v ",val)
-        sum += val
+        sum += ans[i]
     }
     return sum
 }
