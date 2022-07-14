@@ -11,11 +11,11 @@ func treeBuilder(preorder []int,inorder []int,idx *int,mp map[int]int,left,right
         return nil
     }
     inorderIdx := mp[preorder[*idx]]
-    root := TreeNode{Val: inorder[inorderIdx],Left: nil,Right: nil}
+    root := &TreeNode{Val: inorder[inorderIdx]}
     *idx += 1
     root.Left = treeBuilder(preorder,inorder,idx,mp,left,inorderIdx-1)
     root.Right = treeBuilder(preorder,inorder,idx,mp,inorderIdx+1,right)
-    return &root
+    return root
 }
 func buildTree(preorder []int, inorder []int) *TreeNode {
     n := len(inorder)
