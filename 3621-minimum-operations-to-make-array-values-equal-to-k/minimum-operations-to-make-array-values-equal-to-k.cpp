@@ -1,3 +1,13 @@
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
+static const bool Booster = [](){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return true;
+}();
+
 class Solution {
 public:
     int minOperations(vector<int>& nums, int k) {
