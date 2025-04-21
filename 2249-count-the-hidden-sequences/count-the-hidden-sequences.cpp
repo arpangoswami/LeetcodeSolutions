@@ -9,12 +9,6 @@ public:
             maxVal = max(maxVal, pref);
             minVal = min(minVal, pref);
         }
-        if((lower + maxVal) > upper){
-            return 0;
-        }
-        if((upper + minVal) < lower){
-            return 0;
-        }
         return max(0LL, (upper - maxVal) - (lower - minVal) + 1);
     }
 };
