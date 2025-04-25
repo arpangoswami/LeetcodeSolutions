@@ -1,13 +1,17 @@
 class Solution {
+    int getSumOfDigits(int n){
+        int sum = 0;
+        while(n) {
+            sum += (n % 10);
+            n /= 10;
+        }
+        return sum;
+    }
 public:
     int countLargestGroup(int n) {
         vector<int> groupMap(46);
         for(int i=1;i<=n;i++){
-            string s = to_string(i);
-            int sum = 0;
-            for(char &ch:s){
-                sum += (ch - '0');
-            }
+            int sum = getSumOfDigits(i);
             groupMap[sum]++;
         }
         int maxSize = 0, maxNum = 0;
