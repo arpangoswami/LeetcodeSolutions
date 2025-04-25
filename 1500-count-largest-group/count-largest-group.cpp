@@ -1,7 +1,7 @@
 class Solution {
 public:
     int countLargestGroup(int n) {
-        unordered_map<int,int> groupMap;
+        vector<int> groupMap(46);
         for(int i=1;i<=n;i++){
             string s = to_string(i);
             int sum = 0;
@@ -11,11 +11,11 @@ public:
             groupMap[sum]++;
         }
         int maxSize = 0, maxNum = 0;
-        for(auto it:groupMap){
-            if(it.second > maxSize){
-                maxSize = it.second;
+        for(int i=1;i<=45;i++){
+            if(groupMap[i] > maxSize){
+                maxSize = groupMap[i];
                 maxNum = 1;
-            }else if(it.second == maxSize){
+            }else if(groupMap[i] == maxSize){
                 maxNum++;
             }
         }
