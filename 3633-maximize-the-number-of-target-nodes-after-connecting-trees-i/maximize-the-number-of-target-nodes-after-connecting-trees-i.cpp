@@ -3,22 +3,19 @@ class Solution {
         if(maxDist < 0){
             return 0;
         }
-        queue<pair<int,int>> q;
-        q.push({start, 0});
+        queue<array<int,3>> q;
+        q.push({start, 0, -1});
         int ans = 0;
-        vector<bool> visited(adjList.size());
-        visited[start] = true;
         while(!q.empty()){
-            int node = q.front().first,dist = q.front().second;
+            int node = q.front()[0],dist = q.front()[1], prev = q.front()[2];
             q.pop();
             ans++;
             if(dist >= maxDist){
                 continue;
             }
             for(int &x:adjList[node]){
-                if(!visited[x]){
-                    visited[x] = true;
-                    q.push({x, dist+1});
+                if(x != prev){
+                    q.push({x, dist+1, node});
                 }
             }
         }
