@@ -41,10 +41,6 @@ public:
             adjList2[v[0]].push_back(v[1]);
             adjList2[v[1]].push_back(v[0]);
         }
-        vector<int> withinK(n);
-        for(int i=0;i<n;i++){
-            withinK[i] = findNeighbours(i, adjList1, k);
-        }
         int maxV = -1,maxNb = 0;
         for(int i=0;i<m;i++){
             int nb = findNeighbours(i, adjList2, k-1);
@@ -54,7 +50,7 @@ public:
             }
         }
         for(int i=0;i<n;i++){
-            ans[i] = withinK[i] + maxNb;
+            ans[i] = findNeighbours(i, adjList1, k) + maxNb;
         }
         return ans;
     }
