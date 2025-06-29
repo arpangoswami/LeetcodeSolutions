@@ -19,11 +19,16 @@ public:
         sort(nums.begin(), nums.end());
         int N = nums.size();
         ll ans = 0; 
-        for(int i=0;i<N && 2*nums[i] <= target;i++){
-            ll minm = nums[i],maxAllowed = target - nums[i];
-            ll idxMaxAllowed = upper_bound(nums.begin(), nums.end(), maxAllowed) - nums.begin() - 1;
-            ans += getPower(2, idxMaxAllowed - i);
-            ans %= MOD;
+        ll left = 0,right = N-1;
+        while(left <= right){
+            ll sum = nums[left] + nums[right];
+            if(sum > target){
+                right--;
+            }else{
+                ans += getPower(2, right - left);
+                ans %= MOD;
+                left++;
+            }
         }
         return ans;
     }
