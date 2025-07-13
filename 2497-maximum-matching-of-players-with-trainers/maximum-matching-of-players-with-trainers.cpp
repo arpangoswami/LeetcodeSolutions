@@ -5,7 +5,7 @@ public:
         sort(trainers.begin(), trainers.end());
         int N1 = players.size(), N2 = trainers.size();
         int ans = 0;
-        for(int i=N1-1,j=N2-1;i>=0 && j>=0;i--){
+        for(int i=N1-1,j=N2-1;i>=0 && j>=0;--i){
             if(players[i] <= trainers[j]){
                 ans++;
                 j--;
