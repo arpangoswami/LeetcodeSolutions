@@ -20,6 +20,6 @@ class Solution {
     }
 public:
     int maximumLength(vector<int>& nums) {
-        return max(max(sameRemainder(nums, 0), sameRemainder(nums, 1)), max(alternateRemainder(nums, 0), alternateRemainder(nums, 1)));
+        return max({sameRemainder(nums, 0), sameRemainder(nums, 1), alternateRemainder(nums, (nums[0] & 1))});
     }
 };
