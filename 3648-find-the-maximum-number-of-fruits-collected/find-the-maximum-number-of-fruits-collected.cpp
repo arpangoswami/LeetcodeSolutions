@@ -3,7 +3,6 @@ class Solution {
         return (x >= 0 && x < n && y >= 0 && y < n && x > y);
     }
     bool checkValidityThird(int n,int x,int y){
-        //cout << "n: " << n << " x: " << x << " y: " << y << '\n';
         return (x >= 0 && x < n && y >= 0 && y < n && y > x);
     }
     int getMaxFruitsSecondGuy(vector<vector<int>> fruits){
