@@ -18,9 +18,7 @@ public:
             }
             if(!flag){
                 ans.push_back(words[i]);
-                for(int i=0;i<26;i++){
-                    prevFreq[i] = currFreq[i];
-                }
+                prevFreq = currFreq;
             }
         }
         return ans;
