@@ -1,3 +1,9 @@
+auto init = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 'c';
+}();
 class Solution {
 public:
     int maxIncreasingSubarrays(vector<int>& nums) {
