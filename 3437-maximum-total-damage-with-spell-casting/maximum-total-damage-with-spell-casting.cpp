@@ -1,20 +1,36 @@
+using ll = long long;
 class Solution {
+    ll recDp(int idx,vector<ll> &dp,vector<pair<ll,ll>> &sortedCount){
+        if(idx >= sortedCount.size()){
+            return 0;
+        }
+        if(dp[idx] != -1){
+            return dp[idx];
+        }
+        ll ans1 = recDp(idx+1, dp, sortedCount); // current idx skipped
+        ll ans2 = sortedCount[idx].first;
+        int idx2 = idx + 1;
+        while(idx2 < sortedCount.size() && (sortedCount[idx].second + 2) >= sortedCount[idx2].second){
+            idx2++;
+        }
+        ans2 += recDp(idx2, dp, sortedCount); // Taking current idx
+        return dp[idx] = max(ans1, ans2);
+    }
 public:
     long long maximumTotalDamage(vector<int>& power) {
-        unordered_map<int, long long> freq;
-        for (int p : power) freq[p]++;
-        vector<int> keys;
-        for (auto& [k, _] : freq) keys.push_back(k);
-        sort(keys.begin(), keys.end());
-        int n = keys.size();
-        vector<long long> dp(n);
-        dp[0] = freq[keys[0]] * keys[0];
-        for (int i = 1; i < n; i++) {
-            long long take = freq[keys[i]] * keys[i];
-            int prev = upper_bound(keys.begin(), keys.begin() + i, keys[i] - 3) - keys.begin() - 1;
-            if (prev >= 0) take += dp[prev];
-            dp[i] = max(dp[i - 1], take);
+        unordered_map<ll,ll> freq;
+        for(int &x:power){
+            freq[x]++;
         }
-        return dp[n - 1];
+        vector<pair<ll,ll>> sortedCount;
+        for(auto &it:freq){
+            sortedCount.push_back({it.first * it.second, it.first});
+        }
+        sort(sortedCount.begin(), sortedCount.end(), [](pair<ll,ll> &p1, pair<ll,ll> &p2){
+            return (p1.second < p2.second);
+        });
+        int n = sortedCount.size();
+        vector<ll> dp(n+1,-1);
+        return recDp(0,dp,sortedCount);
     }
 };
