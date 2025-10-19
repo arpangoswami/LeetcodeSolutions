@@ -1,4 +1,4 @@
-//auto RuntimeCheat = atexit([]() { ofstream("display_runtime.txt") << "0"; });
+
 auto init = []() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -34,7 +34,6 @@ public:
         unordered_set<string> visited;
         string ans = s;
         dfs(s, a, b, visited, ans);
-        //cout << endl;
         return ans;
     }
 };
