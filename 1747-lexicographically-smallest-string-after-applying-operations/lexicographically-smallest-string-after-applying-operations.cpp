@@ -1,4 +1,4 @@
-auto RuntimeCheat = atexit([]() { ofstream("display_runtime.txt") << "0"; });
+//auto RuntimeCheat = atexit([]() { ofstream("display_runtime.txt") << "0"; });
 auto init = []() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
