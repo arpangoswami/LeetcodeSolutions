@@ -1,5 +1,8 @@
 class Bank {
     vector<long long> balance;
+    inline bool isValidAccount(int accountNum){
+        return (balance.size() > accountNum && accountNum >= 0);
+    }
 public:
     Bank(vector<long long>& balance) {
         this->balance = balance;
@@ -8,7 +11,7 @@ public:
     bool transfer(int account1, int account2, long long money) {
         account1--;
         account2--;
-        if(account1 >= balance.size() || account2 >= balance.size() || money > balance[account1]){
+        if(!isValidAccount(account1) || !isValidAccount(account2) || money > balance[account1]){
             return false;
         }
         balance[account1] -= money;
@@ -18,7 +21,7 @@ public:
     
     bool deposit(int account, long long money) {
         account--;
-        if(account >= balance.size()){
+        if(!isValidAccount(account)){
             return false;
         }
         balance[account] += money;
@@ -27,7 +30,7 @@ public:
     
     bool withdraw(int account, long long money) {
         account--;
-        if(account >= balance.size() || balance[account] < money){
+        if(!isValidAccount(account) || balance[account] < money){
             return false;
         }
         balance[account] -= money;
