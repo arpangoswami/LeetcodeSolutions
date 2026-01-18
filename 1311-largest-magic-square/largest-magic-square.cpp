@@ -72,33 +72,18 @@ public:
         vector<vector<int>> colMat = pref[1];
         vector<vector<int>> diagMat = pref[2];
         vector<vector<int>> antidiagMat = pref[3];
-        // for(int i=0;i<rows;i++){
-        //     for(int j=0;j<cols;j++){
-        //         cout << antidiagMat[i][j] << " ";
-        //     }
-        //     cout << '\n';
-        // }
         for(int length = maxLength;length >= 2; length--) {
             for(int i=0;i<=(rows - length);i++){
                 for(int j=0;j<=(cols - length);j++){
                     
                     int desiredSum = getDiagSum(i,j,i+length-1,j+length-1,diagMat);
-                    // if(i == 1 && j == 1 && length == 3){
-                    //     cout << "diagSum: " << desiredSum << '\n';   
-                    // }
                     if(getAntiDiagSum(i,j+length-1,i+length-1,j,antidiagMat) != desiredSum){
-                        // if(i == 1 && j == 1 && length == 3){
-                        //     cout << "antiDiagSum: " << getAntiDiagSum(i,j+length-1,i+length-1,j,antidiagMat) << '\n';   
-                        // }
                         continue;
                     }
                     bool flag = true;
                     for(int k=i;k<=(i+length-1);k++){
                         if(getRowSum(k,j,k,j+length-1,rowMat) != desiredSum){
                             flag = false;
-                            // if(i == 1 && j == 1 && length == 3){
-                            //     cout << "rowSum: " << getRowSum(k,j,k,j+length-1,rowMat) << '\n';   
-                            // }
                             break;
                         }
                     }
@@ -108,9 +93,6 @@ public:
                     for(int k=j;k<=(j+length-1);k++){
                         if(getColSum(i,k,i+length-1,k, colMat) != desiredSum){
                             flag = false;
-                            // if(i == 1 && j == 1 && length == 3){
-                            //     cout << "colSum: " << getColSum(i,k,i+length-1,k, colMat) << '\n';   
-                            // }
                             break;
                         }
                     }
