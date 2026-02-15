@@ -2,18 +2,15 @@ class Solution {
 public:
     int minRemoval(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
-        int n = nums.size();
-        int i = 0;
-        int maxLen = 0;
-        
-        for (int j = 0; j < n; j++) {
-            // Cast to long long to prevent overflow
-            while ((long long)nums[j] > (long long)nums[i] * k) {
-                i++;
+        int left = 0, n = nums.size(), maxWindow = 1;
+        for(int right = 0;right<n;right++){
+            long long product = (long long)k * (long long)nums[left];
+            while(left < right && product < nums[right]){
+                left++;
+                product = (long long)k * (long long)nums[left];
             }
-            maxLen = max(maxLen, j - i + 1);
+            maxWindow = max(maxWindow, right - left + 1);
         }
-        
-        return n - maxLen;
+        return n - maxWindow;
     }
 };
