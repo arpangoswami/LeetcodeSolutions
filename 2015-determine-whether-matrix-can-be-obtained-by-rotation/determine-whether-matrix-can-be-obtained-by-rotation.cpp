@@ -4,11 +4,8 @@ class Solution {
         vector<vector<int>> ans(n, vector<int>(n));
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                ans[j][i] = matrix[i][j];
+                ans[j][n - i - 1] = matrix[i][j];
             }
-        }
-        for(int i=0;i<n;i++){
-            reverse(ans[i].begin(), ans[i].end());
         }
         return ans;
     }
