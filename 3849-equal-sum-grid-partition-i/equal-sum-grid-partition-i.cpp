@@ -7,6 +7,9 @@ public:
         for(int i=0;i<rows;i++){
             totalSum += accumulate(grid[i].begin(), grid[i].end(), 0LL);
         }
+        if(totalSum % 2 != 0){
+            return false;
+        }
         ll currSum = 0;
         for(int i=0;i<rows;i++){
             currSum += accumulate(grid[i].begin(), grid[i].end(), 0LL);
