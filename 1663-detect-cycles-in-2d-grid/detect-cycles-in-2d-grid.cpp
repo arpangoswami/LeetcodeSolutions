@@ -6,14 +6,15 @@ class Solution {
     }
     bool dfs(int x,int y, int parX, int parY, char ch,vector<vector<char>> &grid,vector<vector<bool>> &visited, const int &rows, const int &cols){
         visited[x][y] = true;
-        for(int k=0;k<4;k++){
-            if(isSafe(x+dx[k],y+dy[k],ch,grid,rows,cols)){
-                if(visited[x+dx[k]][y+dy[k]]){
-                    if((x+dx[k]) == parX && (y+dy[k]) == parY){
+        for(int dir=0;dir<4;dir++){
+            int nx = x+dx[dir], ny = y+dy[dir];
+            if(isSafe(nx, ny, ch, grid, rows, cols)){
+                if(visited[nx][ny]){
+                    if(nx == parX && ny == parY){
                         continue;
                     }
                     return true;
-                }else if(!visited[x+dx[k]][y+dy[k]] && dfs(x+dx[k],y+dy[k],x,y,ch,grid,visited,rows,cols)){
+                }else if(dfs(nx,ny,x,y,ch,grid,visited,rows,cols)){
                     return true;
                 }
             }
