@@ -25,9 +25,6 @@ public:
                 if((newReq * newReq) != (req)){
                     break;
                 }
-                if(newReq == req){
-                    break;
-                }
                 req = newReq;
             }
             ans = max(currAns, ans);
