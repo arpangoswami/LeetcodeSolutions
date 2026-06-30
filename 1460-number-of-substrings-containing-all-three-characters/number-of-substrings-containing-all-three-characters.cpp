@@ -4,7 +4,7 @@ public:
         vector<int> freq(3);
         int n = s.size();
         int ans = 0,left = 0;
-        auto isValid = [&](){
+        function<bool()> isValid = [&](){
             return (freq[0] && freq[1] && freq[2]);
         };
         for(int right = 0;right < n;right++){
