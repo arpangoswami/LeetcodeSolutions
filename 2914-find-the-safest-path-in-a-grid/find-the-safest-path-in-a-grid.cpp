@@ -36,6 +36,7 @@ class Solution {
     }
 public:
     int maximumSafenessFactor(vector<vector<int>>& grid) {
+        ios_base::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
         int rows = grid.size(), cols = grid[0].size();
         vector<vector<bool>> visited(rows, vector<bool>(cols));
         queue<pair<int,int>> thieves;
