@@ -42,40 +42,23 @@ public:
 class Solution {
 public:
     int countCompleteComponents(int n, vector<vector<int>>& edges) {
-        set<pair<int,int>> st;
         Dsu d(n);
+        vector<int> edgeCount(n);
         for(vector<int> &v:edges){
             int x = v[0],y = v[1];
-            if(x > y){
-                swap(x,y);
-            }
-            st.insert({x,y});
             d.unite(x,y);
+            edgeCount[x]++;
         }
-        map<int,vector<int>> mp;
+        unordered_map<int,int> edgeCountParent;
         for(int i=0;i<n;i++){
             int par = d.findPar(i);
-            mp[par].push_back(i);
+            edgeCountParent[par] += edgeCount[i];
         }
         int ans = 0;
-        for(auto &it:mp){
-            vector<int> &v = it.second;
-            sort(v.begin(),v.end());
-            int N = v.size();
-            bool flag = true;
-            
-            for(int i=0;i<(N-1);i++){
-                for(int j=i+1;j<N;j++){
-                    if(!st.count({v[i],v[j]})){
-                        flag = false;
-                        break;
-                    }
-                }
-                if(flag == false){
-                    break;
-                }
-            }
-            if(flag){
+        for(auto it:edgeCountParent){
+            int sz = d.getSize(it.first);
+            int edges = it.second;
+            if(((sz*(sz-1))/2) == edges){
                 ans++;
             }
         }
