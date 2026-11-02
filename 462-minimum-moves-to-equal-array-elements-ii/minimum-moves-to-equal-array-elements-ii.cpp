@@ -12,9 +12,6 @@ public:
         };
 
         long long ans = cost(n / 2);
-        if (n % 2 == 0) {
-            ans = min(ans, cost(n / 2 - 1));
-        }
         return (int)ans;
     }
 };
